@@ -2,11 +2,11 @@ from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
-from services.resume_parser import parse_resume
-from services.job_parser import parse_job_description
-from services.matcher import match_resume_to_job
-from services.learning import generate_learning_path
-from services.pdf_extractor import extract_text_from_pdf
+from backend.services.resume_parser import parse_resume
+from backend.services.job_parser import parse_job_description
+from backend.services.matcher import match_resume_to_job
+from backend.services.learning import generate_learning_path
+from backend.services.pdf_extractor import extract_text_from_pdf
 import json, os
 from datetime import datetime
 
