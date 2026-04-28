@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElevareYou — Career Intelligence</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- PAGE 1: INPUT -->
+  <div id="page-input" class="page active">
+
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+          </div>
+          <span>ElevareYou</span>
+        </div>
+        <div class="nav-tag">Career Intelligence Platform</div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          AI-Powered · Free · Instant
+        </div>
+        <h1 class="hero-title">
+          Are you the<br/>right fit <em>for<br/>that role?</em>
+        </h1>
+        <p class="hero-desc">Upload your resume and a job description. We score your match, find your gaps, and build your personal roadmap — in seconds.</p>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n">100</div><div class="hstat-l">point match score</div></div>
+          <div class="hstat-sep"></div>
+          <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">AI analysis layers</div></div>
+          <div class="hstat-sep"></div>
+          <div class="hstat"><div class="hstat-n">∞</div><div class="hstat-l">free analyses</div></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="float-card fc1">
+          <div class="fc-score">72</div>
+          <div class="fc-label">Match Score</div>
+          <div class="fc-bar"><div class="fc-bar-fill" style="width:72%"></div></div>
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-row"><span class="fc-tag green">Python ✓</span><span class="fc-tag green">LLMs ✓</span></div>
+          <div class="fc-row"><span class="fc-tag red">Rust missing</span><span class="fc-tag amber">+2 gaps</span></div>
+        </div>
+        <div class="float-card fc3">
+          <div class="fc-phase-label">Phase 1 · Beginner</div>
+          <div class="fc-phase-title">Rust Fundamentals</div>
+          <div class="fc-phase-dur">2 weeks · The Rust Book</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="form-grid">
+
+        <!-- RESUME -->
+        <div class="input-panel">
+          <div class="panel-top">
+            <div class="panel-icon blue-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="panel-title">Resume</div>
+              <div class="panel-sub">Your CV or resume</div>
+            </div>
+          </div>
+          <div class="tabs">
+            <button class="tab active" id="rTabPdf" onclick="switchTab('resume','pdf')">Upload PDF</button>
+            <button class="tab" id="rTabText" onclick="switchTab('resume','text')">Paste Text</button>
+          </div>
+          <div id="rPdfZone" class="drop-zone" onclick="document.getElementById('rPdfInput').click()"
+               ondrop="handleDrop(event,'resume')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+            <input type="file" id="rPdfInput" accept=".pdf" style="display:none" onchange="handleFile(event,'resume')"/>
+            <div class="dz-body" id="rDzBody">
+              <div class="dz-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <div class="dz-main">Drop PDF or <span class="dz-link">click to browse</span></div>
+              <div class="dz-hint">Max 5MB · Text-based PDF</div>
+            </div>
+            <div class="dz-success" id="rDzSuccess" style="display:none">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              <span id="rFileName"></span>
+              <button class="dz-clear" onclick="clearFile(event,'resume')">×</button>
+            </div>
+          </div>
+          <div id="rTextZone" style="display:none">
+            <textarea id="rTextInput" class="textarea" placeholder="Paste your full resume — experience, skills, education, projects..."></textarea>
+            <div class="char-count" id="rCharCount">0 characters</div>
+          </div>
+        </div>
+
+        <div class="vs-divider"><div class="vs-circle">VS</div></div>
+
+        <!-- JOB DESCRIPTION -->
+        <div class="input-panel">
+          <div class="panel-top">
+            <div class="panel-icon green-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <div>
+              <div class="panel-title">Job Description</div>
+              <div class="panel-sub">The role you want</div>
+            </div>
+          </div>
+          <div class="tabs">
+            <button class="tab active" id="jTabPdf" onclick="switchTab('job','pdf')">Upload PDF</button>
+            <button class="tab" id="jTabText" onclick="switchTab('job','text')">Paste Text</button>
+          </div>
+          <div id="jPdfZone" class="drop-zone" onclick="document.getElementById('jPdfInput').click()"
+               ondrop="handleDrop(event,'job')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+            <input type="file" id="jPdfInput" accept=".pdf" style="display:none" onchange="handleFile(event,'job')"/>
+            <div class="dz-body" id="jDzBody">
+              <div class="dz-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <div class="dz-main">Drop PDF or <span class="dz-link">click to browse</span></div>
+              <div class="dz-hint">Max 5MB · Text-based PDF</div>
+            </div>
+            <div class="dz-success" id="jDzSuccess" style="display:none">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              <span id="jFileName"></span>
+              <button class="dz-clear" onclick="clearFile(event,'job')">×</button>
+            </div>
+          </div>
+          <div id="jTextZone" style="display:none">
+            <textarea id="jTextInput" class="textarea" placeholder="Paste the job description — responsibilities, required skills, qualifications..."></textarea>
+            <div class="char-count" id="jCharCount">0 characters</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta-area">
+        <button class="cta-btn" id="analyzeBtn" onclick="runAnalysis()">
+          <span>Analyze My Fit</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </button>
+        <div class="cta-note">No account needed · ~15 seconds · Completely free</div>
+      </div>
+
+      <div class="error-bar" id="errorBar" style="display:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="errorMsg"></span>
+      </div>
+    </section>
+
+    <!-- LOADING OVERLAY -->
+    <div class="loading-overlay" id="loadingOverlay" style="display:none">
+      <div class="loading-card">
+        <div class="loading-brand">E</div>
+        <h3 class="loading-title">Analyzing your fit...</h3>
+        <div class="l-steps">
+          <div class="l-step" id="ls1"><div class="l-dot"></div><span>Parsing resume</span></div>
+          <div class="l-step" id="ls2"><div class="l-dot"></div><span>Reading job requirements</span></div>
+          <div class="l-step" id="ls3"><div class="l-dot"></div><span>Computing match score</span></div>
+          <div class="l-step" id="ls4"><div class="l-dot"></div><span>Building learning roadmap</span></div>
+        </div>
+        <div class="l-progress"><div class="l-progress-fill" id="lProgressFill"></div></div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div>ElevareYou &copy; 2025 — Career Intelligence Platform</div>
+      <div>Powered by Groq · Free forever</div>
+    </footer>
+  </div>
+
+
+  <!-- PAGE 2: RESULTS -->
+  <div id="page-results" class="page" style="display:none">
+
+    <div class="r-topbar">
+      <div class="r-topbar-inner">
+        <button class="r-back" onclick="goBack()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+          New Analysis
+        </button>
+        <div class="brand small-brand">
+          <div class="brand-icon sm">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+          </div>
+          ElevareYou
+        </div>
+        <button class="r-download" onclick="downloadReport()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Report
+        </button>
+      </div>
+    </div>
+
+    <div class="r-body" id="rBody">
+
+      <!-- SCORE HERO -->
+      <div class="r-score-hero">
+        <div class="rsh-left">
+          <div class="rsh-label">MATCH SCORE</div>
+          <div class="rsh-number" id="rShNumber">0</div>
+          <div class="rsh-outof">/ 100</div>
+          <div class="rsh-badge" id="rShBadge">—</div>
+          <p class="rsh-role" id="rShRole"></p>
+        </div>
+        <div class="rsh-right">
+          <svg class="rsh-ring" viewBox="0 0 160 160">
+            <circle class="rsr-bg" cx="80" cy="80" r="66"/>
+            <circle class="rsr-fill" id="rsrFill" cx="80" cy="80" r="66"
+              stroke-dasharray="414.69" stroke-dashoffset="414.69"
+              transform="rotate(-90 80 80)"/>
+          </svg>
+          <div class="rsh-ring-num" id="rshRingNum">0</div>
+        </div>
+      </div>
+
+      <!-- BREAKDOWN -->
+      <div class="r-breakdown" id="rBreakdown"></div>
+
+      <!-- SUMMARY -->
+      <div class="r-block">
+        <div class="r-block-label">AI ASSESSMENT</div>
+        <div class="r-summary">
+          <p id="rSummaryText" class="r-summary-p"></p>
+          <div class="r-explain" id="rExplain"></div>
+        </div>
+      </div>
+
+      <!-- STRONG + MISSING -->
+      <div class="r-block">
+        <div class="r-cols">
+          <div class="r-col-card">
+            <div class="rcc-header green-hdr">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              Strong Matches
+            </div>
+            <div class="r-tags" id="rStrong"></div>
+          </div>
+          <div class="r-col-card">
+            <div class="rcc-header amber-hdr">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Missing Skills
+            </div>
+            <div id="rMissing"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISK + TRANSFERABLE -->
+      <div class="r-block">
+        <div class="r-cols">
+          <div class="r-col-card">
+            <div class="rcc-header red-hdr">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+              Risk Areas
+            </div>
+            <ul class="r-list" id="rRisks"></ul>
+          </div>
+          <div class="r-col-card">
+            <div class="rcc-header blue-hdr">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+              Transferable
+            </div>
+            <div class="r-tags" id="rTransfer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROADMAP -->
+      <div class="r-block">
+        <div class="r-block-label">LEARNING ROADMAP</div>
+        <div class="r-roadmap">
+          <div id="rImmediate"></div>
+          <div id="rPhases"></div>
+          <div id="rPortfolio"></div>
+          <div class="r-timeline" id="rTimeline"></div>
+        </div>
+      </div>
+
+      <!-- INTERVIEW PREP -->
+      <div class="r-block" id="rInterviewBlock" style="display:none">
+        <div class="r-block-label">INTERVIEW PREP</div>
+        <div class="r-col-card">
+          <ul class="r-prep-list" id="rInterview"></ul>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="site-footer">
+      <div>ElevareYou &copy; 2025</div>
+      <div>Powered by Groq AI</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
