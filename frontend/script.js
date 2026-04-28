@@ -1,7 +1,7 @@
 // ================================
 // ElevareYou — script.js
 // ================================
-const API = "http://localhost:8000";
+const API = "https://elevareyou.onrender.com/analyze";
 
 // State
 const state = {
